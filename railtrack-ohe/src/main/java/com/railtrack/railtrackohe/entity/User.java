@@ -2,35 +2,41 @@
 
 	import jakarta.persistence.*;
 	import lombok.*;
+	import java.time.LocalDateTime;
 
 	@Entity
-	@Data
-	@NoArgsConstructor
-	@AllArgsConstructor
-	@Builder
 	@Table(name = "users")
+	@Data 
+	@NoArgsConstructor
+	@AllArgsConstructor 
+	@Builder
 	public class User {
-
-	    @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @Column(nullable = false)
 	    private String name;
-
-	    @Column(unique = true, nullable = false)
+	    
+	    @Column(unique = true)
 	    private String email;
-
-	    @Column(nullable = false)
+	    
+	    @Column(name = "employee_id", unique = true)
+	    private String employeeId;
+	    
 	    private String password;
 
 	    @Enumerated(EnumType.STRING)
 	    private Role role;
 
+	    private String department;
+	    
 	    private String phone;
+	    
+	    @Column(name = "is_approved")
+	    private Boolean isApproved = false;
+	    
+	    @Column(name = "created_at")
+	    private LocalDateTime createdAt = LocalDateTime.now();
 
-	    @Builder.Default
-	    @Column(name = "is_verified")
-	    private boolean isVerified = false;
-	
-}
+	 
+	}
+
